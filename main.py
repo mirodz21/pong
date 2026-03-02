@@ -3,24 +3,24 @@ from paddle import Paddle
 from ball import Ball
 import time
 
-MAX_X = 600
-MAX_Y = 800
+MAX_Y = 230
 
 screen = Screen()
-screen.tracer(0)
 screen.setup(width=800, height=500)
 screen.bgcolor("black")
-screen.title("Pong")
+screen.title("Pong Game")
+screen.tracer(0)
 
-l_pad = Paddle((-350,0))
-r_pad = Paddle((350,0))
+l_paddle = Paddle((-390, 0))
+r_paddle = Paddle((380, 0))
 ball = Ball()
 
 screen.listen()
-screen.onkey(l_pad.pad_up, "w")
-screen.onkey(l_pad.pad_down, "s")
-screen.onkey(r_pad.pad_up, "Up")
-screen.onkey(r_pad.pad_down, "Down")
+screen.onkey(l_paddle.move_up, "w")
+screen.onkey(l_paddle.move_down, "s")
+screen.onkey(r_paddle.move_up, "Up")
+screen.onkey(r_paddle.move_down, "Down")
+
 
 game_over = False
 while not game_over:
@@ -28,10 +28,12 @@ while not game_over:
     screen.update()
     ball.move()
 
-    if ball.ycor() > 220 or ball.ycor() < -220:
-        ball.y_bounce()
+    # BOUNCE IF COLLISION WITH MAX Y AND MAX -Y
+    if ball.ycor() > MAX_Y or ball.ycor() < -MAX_Y:
+        ball.bounce_y()
 
-    if ball.distance(r_pad) < 50 and ball.xcor() > 320 or ball.distance(l_pad) < 50 and ball.xcor() < -320:
-        ball.x_bounce()
+    if (ball.distance(r_paddle) < 30 and ball.xcor() > 330 or
+    ball.distance(l_paddle) < 30 and ball.xcor() < -330):
+        ball.bounce_x()
 
 screen.exitonclick()

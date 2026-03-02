@@ -1,21 +1,27 @@
 from turtle import Turtle
 
-PADDLE_POSITION = [(-350, 0), (350, 0)]
+MAX_Y = 190
 
 class Paddle(Turtle):
-    def __init__(self, position):
+
+    def __init__(self,position):
         super().__init__()
         self.shape("square")
         self.color("white")
-        self.shapesize(5,1)
+        self.shapesize(stretch_wid=5, stretch_len=1)
         self.penup()
         self.goto(position)
 
+    def move_up(self):
+        if self.ycor() > MAX_Y:
+            pass
+        else:
+            new_y = self.ycor() + 25
+            self.goto(self.xcor(),new_y )
 
-    def pad_up(self):
-        go_up = self.ycor() + 25
-        self.goto(self.xcor(), go_up)
-
-    def pad_down(self):
-        go_down =self.ycor() - 25
-        self.goto(self.xcor(), go_down)
+    def move_down(self):
+        if self.ycor() <= -MAX_Y:
+            pass
+        else:
+            new_y = self.ycor() - 25
+            self.goto(self.xcor(), new_y)
