@@ -1,6 +1,6 @@
 # 🏓 Pong
 
-A classic **Pong** game built with Python. Control your paddle, bounce the ball, and compete to score points in this modern recreation of the arcade classic.
+A classic **Pong** game built with Python. Control your paddle, bounce the ball, and compete to score points.
 
 ---
 
